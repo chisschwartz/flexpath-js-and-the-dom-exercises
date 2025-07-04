@@ -54,11 +54,9 @@ Select the element with ID 'introduction' and access its parent node.
 Log the parent node's tag name to the console.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const parentName = document.getElementById("introduction").parentNode.nodeName;
+
+console.log(parentName);
 
 /*
 Exercise 5: Accessing Child Nodes
