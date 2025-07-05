@@ -128,6 +128,8 @@ function buttonAlert(){ alert("Button Clicked!");};
 
 alertButton.addEventListener("click", buttonAlert);
 
+const timeOut = setTimeout(removeEvent, 5000);
+
 function removeEvent() {
 	alertButton.removeEventListener("click", buttonAlert);
 }
@@ -142,11 +144,14 @@ Add an event listener to the document that logs the
 key and code of any key pressed by the user.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+var keys = "";
+
+document.addEventListener("keydown", function(event) {
+	const keyLogger = event.key;
+	const keyCode = event.code;
+
+	console.log(keys += (keyLogger + " " + keyCode + " "));
+});
 
 /*
 Exercise 11: Event Propagation
@@ -161,11 +166,16 @@ In each event handler, log a message indicating which element was clicked.
 Observe event bubbling.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const interactiveBubble = document.getElementById("interactive");
+const colorButton = document.getElementById("color-button");
+
+interactiveBubble.addEventListener("click", function(event) {
+	console.log("Item Clicked") //<---- need to indicate what item clicked//
+})
+
+colorButton.addEventListener("click", function(event) {
+	console.log("Color Button Clicked")
+})
 
 /*
 Exercise 12: Stopping Event Propagation
