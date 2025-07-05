@@ -62,11 +62,9 @@ Select the <ul> with ID 'item-list' and log the number of
 its child elements to the console.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const childrenNodes = document.getElementById("item-list").childNodes.length;
+
+console.log(childrenNodes);
 
 /*
 Exercise 6: Updating Inner HTML
@@ -77,11 +75,12 @@ Change the inner HTML of the element with ID 'introduction' to
 include a new paragraph saying "This content has been updated!".
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const para = document.createElement("p");
+const node = document.createTextNode("This content has been updated!");
+para.appendChild(node);
+
+const element = document.getElementById("introduction");
+element.appendChild(para);
 
 /*
 Exercise 7: Changing Attributes with setAttribute
@@ -92,11 +91,9 @@ Assume there's an image with ID 'main-image' in your HTML.
 Change its src attribute to point "image2.png".
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const image = document.getElementById("main-image");
+image.setAttribute("src", "image2.png");
+
 
 /*
 Exercise 8: Adding an Event Listener
@@ -107,11 +104,9 @@ Add an event listener to the button with ID 'alert-button' that
 shows an alert with the message "Button Clicked!" when clicked.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+// const alertButton = document.getElementById("alert-button");
+// alertButton.addEventListener("click", 
+// function(){ alert("Button Clicked!"); });
 
 /*
 Exercise 9: Removing an Event Listener
@@ -127,11 +122,16 @@ Then, remove the event listener so that clicking the button no longer
 shows the alert after 5 seconds.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const alertButton = document.getElementById("alert-button");
+
+function buttonAlert(){ alert("Button Clicked!");};
+
+alertButton.addEventListener("click", buttonAlert);
+
+function removeEvent() {
+	alertButton.removeEventListener("click", buttonAlert);
+}
+
 
 /*
 Exercise 10: Handling Keyboard Events
