@@ -134,7 +134,6 @@ function removeEvent() {
 	alertButton.removeEventListener("click", buttonAlert);
 }
 
-
 /*
 Exercise 10: Handling Keyboard Events
 
@@ -170,12 +169,13 @@ const interactiveBubble = document.getElementById("interactive");
 const colorButton = document.getElementById("color-button");
 
 interactiveBubble.addEventListener("click", function(event) {
-	console.log("Item Clicked") //<---- need to indicate what item clicked//
-})
+	let clickedElement = event.target;
+	console.log(clickedElement.innerHTML + " Clicked");
+});
 
-colorButton.addEventListener("click", function(event) {
-	console.log("Color Button Clicked")
-})
+// colorButton.addEventListener("click", function(event) {
+// 	console.log("Color Button Clicked")
+// });
 
 /*
 Exercise 12: Stopping Event Propagation
@@ -186,11 +186,10 @@ Modify the previous exercise to prevent the click event on
 the button from bubbling up to the section.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+// colorButton.addEventListener("click", function(event) {
+// 	console.log("Color Button Clicked")
+// 	event.stopPropagation();
+// });
 
 /*
 Exercise 13: Using console.log for Debugging
@@ -202,11 +201,18 @@ log the current background color of the button before changing
 it to light green.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+colorButton.addEventListener("click", function(event) {
+	console.log("Color Button Clicked")
+	event.stopPropagation();
+
+	console.log(colorButton.style.backgroundColor)
+	
+	console.log(color);
+
+	// if(color != "light green") {
+	// 	console.log(document.getElementById("color-button").innerHTML = color);
+	// }
+});
 
 /*
 Exercise 14: Creating and Appending New Elements
@@ -217,11 +223,12 @@ Create a new <li> element with the text "Item 4" and append it to
 the <ul> with ID 'item-list'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const newNode = document.createElement("li")
+const textNode = document.createTextNode("Item 4")
+
+newNode.appendChild(textNode);
+
+document.getElementById("item-list").appendChild(newNode);
 
 /*
 Exercise 15: Removing Elements from the DOM
@@ -231,11 +238,9 @@ Description:
 Remove the first <li> element from the <ul> with ID 'item-list'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const removedElement = document.getElementById("item-list");
+
+removedElement.removeChild(removedElement.firstElementChild);
 
 /*
 Exercise 16: Using classList.add
@@ -246,11 +251,16 @@ Add a class 'highlight' to all <p> elements inside the
 section with ID 'content'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+// function highlightFunction(){
+
+// const highlightP = document.querySelectorAll("p.content").classList
+
+// highlightP.add('highlight')
+// };
+
+const list = document.getElementById("content").classList;
+
+list.add("highlight")
 
 /*
 Exercise 17: Using classList.toggle
@@ -261,12 +271,9 @@ Add a click event listener to the button with ID 'color-button' that
 toggles the class 'active' on itself.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
-
+colorButton.addEventListener("click", function(event) {
+	colorButton.classList.toggle("active");
+});
 /*
 Exercise 18: Preventing Default Behavior
 
