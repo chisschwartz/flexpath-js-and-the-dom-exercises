@@ -186,10 +186,10 @@ Modify the previous exercise to prevent the click event on
 the button from bubbling up to the section.
 */
 
-// colorButton.addEventListener("click", function(event) {
-// 	console.log("Color Button Clicked")
-// 	event.stopPropagation();
-// });
+colorButton.addEventListener("click", function(event) {
+	console.log("Color Button Clicked")
+	event.stopPropagation();
+});
 
 /*
 Exercise 13: Using console.log for Debugging
@@ -201,17 +201,9 @@ log the current background color of the button before changing
 it to light green.
 */
 
-colorButton.addEventListener("click", function(event) {
-	console.log("Color Button Clicked")
-	event.stopPropagation();
-
-	console.log(colorButton.style.backgroundColor)
-	
-	console.log(color);
-
-	// if(color != "light green") {
-	// 	console.log(document.getElementById("color-button").innerHTML = color);
-	// }
+colorButton.addEventListener("click", function() {
+	console.log("current background color is:", colorButton.style.backgroundColor);
+	colorButton.style.backgroundColor = "lightgreen";
 });
 
 /*
@@ -251,16 +243,12 @@ Add a class 'highlight' to all <p> elements inside the
 section with ID 'content'.
 */
 
-// function highlightFunction(){
+const content = document.getElementById("content");
+const paragraphs = content.querySelectorAll("p");
 
-// const highlightP = document.querySelectorAll("p.content").classList
-
-// highlightP.add('highlight')
-// };
-
-const list = document.getElementById("content").classList;
-
-list.add("highlight")
+paragraphs.forEach(function (p) {
+	p.classList.add("highlight");
+});
 
 /*
 Exercise 17: Using classList.toggle
@@ -271,9 +259,10 @@ Add a click event listener to the button with ID 'color-button' that
 toggles the class 'active' on itself.
 */
 
-colorButton.addEventListener("click", function(event) {
+colorButton.addEventListener("click", function() {
 	colorButton.classList.toggle("active");
 });
+
 /*
 Exercise 18: Preventing Default Behavior
 
@@ -283,11 +272,12 @@ Add a submit event listener to the form with ID 'input-form' that
 prevents the form from submitting and logs the input value to the console.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const submitButton = document.getElementById("input-form");
+
+submitButton.addEventListener("submit", function(event) {
+	event.preventDefault();
+	console.log("Submit button clicked");
+});
 
 /*
 Exercise 19: Simple Drag and Drop
@@ -298,11 +288,23 @@ Make the element with ID 'drag-source' draggable and implement
 drag and drop functionality to move it to the element with ID 'drop-target'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const dragSource = document.getElementById("drag-source");
+const dropTarget = document.getElementById("drop-target");
+
+dragSource.addEventListener("dragstart", function(event) {
+	event.dataTransfer.setData("text/plain", event.target.id);
+});
+
+dropTarget.addEventListener("dragover", function(event) {
+	event.preventDefault();
+});
+
+dropTarget.addEventListener("drop", function (event) {
+	event.preventDefault();
+	const data = event.dataTransfer.getData("text/plain");
+	const dragElement = document.getElementById(data);
+	dropTarget.appendChild(dragElement);
+});
 
 /*
 Exercise 20: Using dataTransfer in Drag and Drop
@@ -315,11 +317,17 @@ in the previous exercise.
 For example, pass a message and log it when the drop occurs.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+dragSource.addEventListener("dragstart", function(event) {
+	event.dataTransfer.setData("text/plain", "custom data");
+});
+
+dropTarget.addEventListener("drop", function (event) {
+	event.preventDefault();
+	const data = event.dataTransfer.getData("text/plain");
+	console.log("Dropped data:", data);
+	dropTarget.appendChild(dragSource);
+});
+
 
 /*
 Exercise 21: Cloning Nodes
@@ -330,11 +338,11 @@ Clone the element with ID 'main-title' and
 append the clone to the <footer> element.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const mainTitle = document.getElementById("main-title");
+
+const clonedTitle = mainTitle.cloneNode(true);
+const footer = document.querySelector("footer");
+footer.appendChild(clonedTitle);
 
 /*
 Exercise 22: Modifying Styles with JavaScript
@@ -345,11 +353,15 @@ Change the background color of the <body> when the
 user moves the mouse over the <header> element.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const header = document.querySelector("header");
+
+header.addEventListener("mouseover", function() {
+	document.body.style.backgroundColor = "red";
+});
+
+header.addEventListener("mouseout", function() {
+	document.body.style.backgroundColor = "";
+});
 
 /*
 Exercise 23: Debouncing Function Calls
@@ -361,11 +373,14 @@ new window size after the user stops resizing the browser window for
 500 milliseconds.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let resizeTimeout;
+
+window.addEventListener("resize", function() {
+	clearTimeout(resizeTimeout);
+	resizeTimeout = setTimeout(function() {
+		console.log("Window size:", window.innerWidth, "x", window.innerHeight);
+	}, 500);
+});
 
 /*
 Exercise 24: Optimizing DOM Manipulations
@@ -378,11 +393,18 @@ using a DocumentFragment. You can create one by using:
 `document.createDocumentFragment()`
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+const itemList = document.getElementById("item-list")
+
+const fragment = document.createDocumentFragment();
+
+for (i = 4; i <= 103; i++) {
+	const list = document.createElement("li");
+	list.textContent = "Item " + i;
+	fragment.appendChild(list);
+}
+
+itemList.appendChild(fragment);
+
 
 /*
 Exercise 25: Using Event Delegation
@@ -394,8 +416,8 @@ add a single event listener to 'item-list' that logs the
 text of the clicked list item.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+itemList.addEventListener("click", function(event) {
+	if (event.target && event.target.nodeName === "LI") {
+		console.log("List item clicked:", event.target.textContent);
+	}
+});
